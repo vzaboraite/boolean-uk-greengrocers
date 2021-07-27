@@ -151,6 +151,9 @@ function renderStoreItem(item) {
 
   const buttonAddToCartElem = document.createElement("button");
   buttonAddToCartElem.innerText = "Add to cart";
+  buttonAddToCartElem.addEventListener("click", () => {
+    console.log("Item added to cart!");
+  });
   listItemElem.append(buttonAddToCartElem);
 
   return listItemElem;
