@@ -226,16 +226,23 @@ function renderCartItem(item) {
   return listItemElem;
 }
 
-  3.1 listenToAddButton()
-    - addEventListener to ".add-btn"
+// 3.0 create action functions: (HARD)
+// USER ACTIONS:
+//  3.0.1 addItemToCart()
+//    - addEventListener to buttonAddToCartElem in renderStoreItem()
+//    - create an empty array that will store/hold item objects and its quantity
 
-  3.2 addItemToCart()
-    - works with listenToAddButton()
-  
-  3.3 listenToRemoveButton()
-    - addEventListener to ".remove-btn"
-  
-  3.4 removeItemFromCart()
-    - works with listenToRemoveButton()
-  
-*/
+//   3.0.2 incrementQuantity()
+//     - addEventListener to ".add-btn"
+
+//  3.0.3 decrementQuantity()
+//     - addEventListener to ".remove-btn"
+
+// PROGRAM SUBACTIONS:
+//   3.0.4 removeFromCart()
+//    - works with decrementQuantity() in 3.0.3
+//    - if quantity = 0
+
+//   3.0.5 countTotalPrice()
+//    - will work with an array described in step 3.0.1
+//
