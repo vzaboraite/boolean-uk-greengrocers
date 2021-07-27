@@ -146,13 +146,8 @@ function renderStoreItem(item) {
   const divElem = document.createElement("div");
   divElem.className = "store--item-icon";
   listItemElem.append(divElem);
-
-  const imageElem = document.createElement("img");
-  const imageSrc = `/assets/icons/${item.id}.svg`;
-  imageElem.setAttribute("src", imageSrc);
-  const imageAlt = item.name;
-  imageElem.setAttribute("alt", imageAlt);
-  divElem.append(imageElem);
+  // imageElem got from renderImageElement()
+  divElem.append(renderImageElement(item));
 
   const buttonAddToCartElem = document.createElement("button");
   buttonAddToCartElem.innerText = "Add to cart";
