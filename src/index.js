@@ -105,6 +105,17 @@ const storeItems = [
 //   - input: an array of store items
 //   - output: -
 
+// reusable function used in renderStoreItem() and renderCartItem()
+function renderImageElement(item) {
+  const imageElem = document.createElement("img");
+  const imageSrc = `/assets/icons/${item.id}.svg`;
+  imageElem.setAttribute("src", imageSrc);
+  const imageAlt = item.name;
+  imageElem.setAttribute("alt", imageAlt);
+
+  return imageElem;
+}
+
 function renderStoreItemsList(items) {
   for (let i = 0; i < items.length; i++) {
     const item = items[i];
