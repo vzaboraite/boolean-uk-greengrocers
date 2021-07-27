@@ -27,17 +27,17 @@ This is how an item object should look like
 - Use action functions with your Event Listeners, these will have names like addItemToCart and removeItemFromCart
 */
 
-/*
-*******PSEUDO-CODE*******
+// Anchor objects/elements:
+// *1 for store items: ".store--item-list"
+// *2 for cart items: ".cart--item-list"
+// *3 for total price: ".total-number"
 
-Anchor objects/elements:
-*1 for store items: ".store--item-list"
-*2 for cart items: ".cart--item-list"
+const storeItemListElem = document.querySelector(".store--item-list");
 
-1.0 storeItems[{}, {}...]:
-  - create an array of objects using given template above. 
-  -object keys:
-    => id, name, price
+const cartItemListElem = document.querySelector(".cart--item-list");
+
+const totalNumberElem = document.querySelector(".total-number");
+
 
 2.0 create render functions:
 
