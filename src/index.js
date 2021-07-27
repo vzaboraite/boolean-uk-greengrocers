@@ -96,6 +96,7 @@ const storeItems = [
   },
 ];
 
+const cartItems = [];
 // 2.0 create render functions:
 
 //   2.1 renderStoreItemsList(items):
@@ -151,12 +152,40 @@ function renderStoreItem(item) {
 
   const buttonAddToCartElem = document.createElement("button");
   buttonAddToCartElem.innerText = "Add to cart";
+  // Event listener "click"
   buttonAddToCartElem.addEventListener("click", () => {
-    console.log("Item added to cart!");
+    let cartItem = {
+      item: { id: item.id, name: item.name, price: item.price },
+      quantity: 1,
+    };
+    cartItems.push(cartItem);
+
+    updateCartElement();
   });
   listItemElem.append(buttonAddToCartElem);
 
   return listItemElem;
+}
+
+function updateCartElement() {
+  cartItemListElem.innerHTML = "";
+
+  renderCart(cartItems);
+  countTotalPrice(cartItems);
+}
+
+// TODO: continue working on this function
+// update totalNumberElem.innerText (totalPrice)
+function countTotalPrice(items) {
+  let totalPrice = 0;
+  for (let i = 0; i < items.length; i++) {
+    const product = items[i];
+    const price = product.item.price;
+    const quantity = product.quantity;
+
+    totalPrice += price * quantity;
+  }
+  return totalPrice;
 }
 
 //   2.3 renderCart()
@@ -173,7 +202,6 @@ function renderCart(items) {
     cartItemListElem.append(listItemElem);
   }
 }
-renderCart(storeItems);
 
 //   2.4 create renderCartItem(item):
 //     - use template in templates/cart-item.html
@@ -200,12 +228,12 @@ function renderCartItem(item) {
   const listItemElem = document.createElement("li");
   cartItemListElem.append(listItemElem);
   // imageElem got from renderImageElement()
-  const imageElem = renderImageElement(item);
+  const imageElem = renderImageElement(item.item);
   imageElem.className = "cart--item-icon";
   listItemElem.append(imageElem);
 
   const itemNameElem = document.createElement("p");
-  itemNameElem.innerText = item.name;
+  itemNameElem.innerText = item.item.name;
   listItemElem.append(itemNameElem);
 
   const minusButtonElem = document.createElement("button");
