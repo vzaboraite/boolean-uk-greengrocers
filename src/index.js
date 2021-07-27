@@ -96,30 +96,59 @@ const storeItems = [
   },
 ];
 
-  2.1 renderStoreItemList(items):
-    - use renderStoreItem();
+// 2.0 create render functions:
 
-  - input: an array of store items
-  - output: ??
+//   2.1 renderStoreItemsList(items):
+//     - use renderStoreItem();
+//      - use for loop to generate list item elements
 
-  2.2 create renderStoreItem(item):
-    - use template in templates/store-item.html
-    - use for loop to create list item element:
-      => li 
-        -inside li:
-        => div.className = "store--item-icon" 
-          - inside div:
-            => img:
-              - attributes: src, alt
-        => button.innerText = "Add to cart" 
+//   - input: an array of store items
+//   - output: -
 
-  - input: item from storeItems array
-  - output: ??
-    
-  2.3 renderCart()
-    - use renderCartItem();
-  - input: ??
-  - output: ??
+function renderStoreItemsList(items) {
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i];
+    const listItemElem = renderStoreItem(item);
+    storeItemListElem.append(listItemElem);
+  }
+}
+
+renderStoreItemsList(storeItems);
+
+//   2.2 create renderStoreItem(item):
+//     - use template in templates/store-item.html
+//       => li
+//         -inside li:
+//         => div.className = "store--item-icon"
+//           - inside div:
+//             => img:
+//               - attributes: src, alt
+//         => button.innerText = "Add to cart"
+
+//   - input: item from storeItems array
+//   - output: listItemElem
+
+function renderStoreItem(item) {
+  const listItemElem = document.createElement("li");
+  storeItemListElem.append(listItemElem);
+
+  const divElem = document.createElement("div");
+  divElem.className = "store--item-icon";
+  listItemElem.append(divElem);
+
+  const imageElem = document.createElement("img");
+  const imageSrc = `/assets/icons/${item.id}.svg`;
+  imageElem.setAttribute("src", imageSrc);
+  const imageAlt = item.name;
+  imageElem.setAttribute("alt", imageAlt);
+  divElem.append(imageElem);
+
+  const buttonAddToCartElem = document.createElement("button");
+  buttonAddToCartElem.innerText = "Add to cart";
+  listItemElem.append(buttonAddToCartElem);
+
+  return listItemElem;
+}
 
   2.4 create renderCartItem(item):
     - use template in templates/cart-item.html
