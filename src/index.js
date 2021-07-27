@@ -156,29 +156,70 @@ function renderStoreItem(item) {
   return listItemElem;
 }
 
-  2.4 create renderCartItem(item):
-    - use template in templates/cart-item.html
-    - use for loop to create list item element:
-      => li
-        - inside li:
-        => img:
-          - attributes: className = "cart--item-icon", src(assets/icons/...), alt
-        => p:
-          - innerText = itemName
-        => button:
-          - className/List = "quantity-btn remove-btn center"
-          - innerText = "-"
-        => span:
-          - className/List = "quantity-text center"
-          - innerText = number
-        => button:
-          - className/List = "quantity-btn add-btn center"
-          - innerText = "+"
+//   2.3 renderCart()
+//     - use renderCartItem();
+//     - use for loop to generate list item elements
 
-  - input: an object from storeItems array
-  - output: ??
+//   - input: an array of store items
+//   - output: -
 
-3.0 create action functions: (HARD)
+function renderCart(items) {
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i];
+    const listItemElem = renderCartItem(item);
+    cartItemListElem.append(listItemElem);
+  }
+}
+renderCart(storeItems);
+
+//   2.4 create renderCartItem(item):
+//     - use template in templates/cart-item.html
+//       => li
+//         - inside li:
+//         => img:
+//           - attributes: className = "cart--item-icon", src(assets/icons/...), alt
+//         => p:
+//           - innerText = itemName
+//         => button:
+//           - className/List = "quantity-btn remove-btn center"
+//           - innerText = "-"
+//         => span:
+//           - className/List = "quantity-text center"
+//           - innerText = number
+//         => button:
+//           - className/List = "quantity-btn add-btn center"
+//           - innerText = "+"
+
+//   - input: an object from storeItems array
+//   - output: listItemElem
+
+function renderCartItem(item) {
+  const listItemElem = document.createElement("li");
+  cartItemListElem.append(listItemElem);
+  // imageElem got from renderImageElement()
+  listItemElem.append(renderImageElement(item));
+
+  const itemNameElem = document.createElement("p");
+  itemNameElem.innerText = item.name;
+  listItemElem.append(itemNameElem);
+
+  const minusButtonElem = document.createElement("button");
+  minusButtonElem.setAttribute("class", "quantity-btn remove-btn center");
+  minusButtonElem.innerText = "-";
+  listItemElem.append(minusButtonElem);
+
+  const quantityElem = document.createElement("span");
+  quantityElem.setAttribute("class", "quantity-text center");
+  quantityElem.innerText = "1";
+  listItemElem.append(quantityElem);
+
+  const plusButtonElem = document.createElement("button");
+  plusButtonElem.setAttribute("class", "quantity-btn add-btn center");
+  plusButtonElem.innerText = "+";
+  listItemElem.append(plusButtonElem);
+
+  return listItemElem;
+}
 
   3.1 listenToAddButton()
     - addEventListener to ".add-btn"
