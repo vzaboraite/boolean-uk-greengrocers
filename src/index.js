@@ -38,8 +38,63 @@ const cartItemListElem = document.querySelector(".cart--item-list");
 
 const totalNumberElem = document.querySelector(".total-number");
 
+// 1.0 storeItems[{}, {}...]:
+//   - create an array of objects using given template above.
+//   -object keys:
+//     => id, name, price
 
-2.0 create render functions:
+const storeItems = [
+  {
+    id: "001-beetroot",
+    name: "beetroot",
+    price: 0.35,
+  },
+  {
+    id: "002-carrot",
+    name: "carrot",
+    price: 0.15,
+  },
+  {
+    id: "003-apple",
+    name: "apple",
+    price: 0.25,
+  },
+  {
+    id: "004-apricot",
+    name: "apricot",
+    price: 0.5,
+  },
+  {
+    id: "005-avocado",
+    name: "avocado",
+    price: 0.75,
+  },
+  {
+    id: "006-bananas",
+    name: "bananas",
+    price: 0.3,
+  },
+  {
+    id: "007-bell-pepper",
+    name: "bell-pepper",
+    price: 0.25,
+  },
+  {
+    id: "008-berry",
+    name: "berry",
+    price: 0.15,
+  },
+  {
+    id: "009-blueberry",
+    name: "blueberry",
+    price: 0.15,
+  },
+  {
+    id: "010-eggplant",
+    name: "eggplant",
+    price: 0.6,
+  },
+];
 
   2.1 renderStoreItemList(items):
     - use renderStoreItem();
