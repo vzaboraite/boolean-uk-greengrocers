@@ -197,7 +197,9 @@ function renderCartItem(item) {
   const listItemElem = document.createElement("li");
   cartItemListElem.append(listItemElem);
   // imageElem got from renderImageElement()
-  listItemElem.append(renderImageElement(item));
+  const imageElem = renderImageElement(item);
+  imageElem.className = "cart--item-icon";
+  listItemElem.append(imageElem);
 
   const itemNameElem = document.createElement("p");
   itemNameElem.innerText = item.name;
