@@ -36,7 +36,7 @@ Challenge 1
   2.1 add event listeners to the buttons
 
 3.0 create filter function
-  - input: storeItems array
+  - input: storeItems array and expectedType string
   - output: filteredItems array
 
 */
@@ -133,18 +133,30 @@ function renderFilterButtons() {
   veggieBtnElem.className = "filter-button";
   veggieBtnElem.innerText = "Vegetables";
   veggieBtnElem.style.margin = "5px";
+  veggieBtnElem.addEventListener("click", () => {
+    storeItemListElem.innerHTML = "";
+    renderStoreItemsList(filterItemsByType(storeItems, "vegetable"));
+  });
   divBtnElem.append(veggieBtnElem);
 
   const fruitBtnElem = document.createElement("button");
   fruitBtnElem.className = "filter-button";
   fruitBtnElem.innerText = "Fruits";
   fruitBtnElem.style.margin = "5px";
+  fruitBtnElem.addEventListener("click", () => {
+    storeItemListElem.innerHTML = "";
+    renderStoreItemsList(filterItemsByType(storeItems, "fruit"));
+  });
   divBtnElem.append(fruitBtnElem);
 
   const allItemsBtnElem = document.createElement("button");
   allItemsBtnElem.className = "filter-button";
   allItemsBtnElem.innerText = "Show all items";
   allItemsBtnElem.style.margin = "5px";
+  allItemsBtnElem.addEventListener("click", () => {
+    storeItemListElem.innerHTML = "";
+    renderStoreItemsList(storeItems);
+  });
   divBtnElem.append(allItemsBtnElem);
 }
 renderFilterButtons();
@@ -175,6 +187,7 @@ function renderImageElement(item) {
   return imageElem;
 }
 
+// TODO: fix bug => prevent duplications, render list just once
 function renderStoreItemsList(items) {
   for (let i = 0; i < items.length; i++) {
     const item = items[i];
