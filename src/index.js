@@ -18,10 +18,20 @@ Challenge 1
 1.0 update storeItems[]:
   - add types of either vegetable or fruit to the item 
 
-2.0 create filter buttons in store section:
+2.0 create filter buttons in store section and append them to "#store" between h1 and ul
   - show all items;
   - show vegetables
   - show fruits
+
+  - create structure for buttons:
+   <div class="center">
+    <span>Filter items by type:</span>
+    <div>
+      <button>Vegetable</button>
+      <button>Fruit</button>
+      <button>Show all items</button>
+    </div>
+   </div>
 
   2.1 add event listeners to the buttons
 
