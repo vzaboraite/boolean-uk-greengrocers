@@ -42,6 +42,10 @@ Challenge 1
 */
 
 // Anchor elements:
+const storeElem = document.querySelector("#store");
+
+const mainHeadingElem = document.querySelector("h1");
+
 const storeItemListElem = document.querySelector(".store--item-list");
 
 const cartItemListElem = document.querySelector(".cart--item-list");
