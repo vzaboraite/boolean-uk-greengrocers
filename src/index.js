@@ -149,6 +149,21 @@ function renderFilterButtons() {
 }
 renderFilterButtons();
 
+function filterItemsByType(items, expectedType) {
+  const filteredItems = [];
+
+  // filtering items and adding them in filteredItems[]
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i];
+    const type = item.type;
+
+    if (type === expectedType) {
+      filteredItems.push(item);
+    }
+  }
+  return filteredItems;
+}
+
 // reusable function used in renderStoreItem() and renderCartItem()
 function renderImageElement(item) {
   const imageElem = document.createElement("img");
