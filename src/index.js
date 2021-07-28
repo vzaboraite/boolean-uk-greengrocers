@@ -163,6 +163,55 @@ function renderFilterButtons() {
 }
 renderFilterButtons();
 
+function renderSortButtons() {
+  const sortSectionElem = document.createElement("div");
+  sortSectionElem.className = "center";
+  storeElem.insertBefore(sortSectionElem, mainHeadingElem.nextSibling);
+
+  const sortSpanElem = document.createElement("span");
+  sortSpanElem.innerText = "Sort items by:";
+  sortSectionElem.append(sortSpanElem);
+
+  const priceSpanElem = document.createElement("span");
+  priceSpanElem.innerText = "Price:";
+  sortSectionElem.append(priceSpanElem);
+
+  const priceBtnElem = document.createElement("div");
+  sortSectionElem.append(priceBtnElem);
+
+  const lowBtnElem = document.createElement("button");
+  lowBtnElem.className = "sort-button";
+  lowBtnElem.innerText = "Low to high";
+  lowBtnElem.style.margin = "5px";
+  priceBtnElem.append(lowBtnElem);
+
+  const highBtnElem = document.createElement("button");
+  highBtnElem.className = "sort-button";
+  highBtnElem.innerText = "High to low";
+  highBtnElem.style.margin = "5px";
+  priceBtnElem.append(highBtnElem);
+
+  const nameSpanElem = document.createElement("span");
+  nameSpanElem.innerText = "Name:";
+  sortSectionElem.append(nameSpanElem);
+
+  const nameBtnElem = document.createElement("div");
+  sortSectionElem.append(nameBtnElem);
+
+  const ascendingBtnElem = document.createElement("button");
+  ascendingBtnElem.className = "sort-button";
+  ascendingBtnElem.innerText = "Ascending";
+  ascendingBtnElem.style.margin = "5px";
+  nameBtnElem.append(ascendingBtnElem);
+
+  const descendingBtnElem = document.createElement("button");
+  descendingBtnElem.className = "sort-button";
+  descendingBtnElem.innerText = "Descending";
+  descendingBtnElem.style.margin = "5px";
+  nameBtnElem.append(descendingBtnElem);
+}
+renderSortButtons();
+
 function filterItemsByType(items, expectedType) {
   const filteredItems = [];
 
