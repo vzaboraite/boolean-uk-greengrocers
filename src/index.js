@@ -154,11 +154,7 @@ function renderStoreItem(item) {
   buttonAddToCartElem.innerText = "Add to cart";
   // Event listener "click"
   buttonAddToCartElem.addEventListener("click", () => {
-    let cartItem = {
-      item: { id: item.id, name: item.name, price: item.price },
-      quantity: 1,
-    };
-    cartItems.push(cartItem);
+    addItemToCart(item, cartItems);
 
     updateCartElement();
   });
@@ -173,20 +169,6 @@ function updateCartElement() {
 
   renderCart(cartItems);
   countTotalPrice(cartItems);
-}
-
-function countTotalPrice(items) {
-  let totalPrice = 0;
-  for (let i = 0; i < items.length; i++) {
-    const product = items[i];
-    const price = product.item.price;
-    const quantity = product.quantity;
-
-    totalPrice += price * quantity;
-
-    totalNumberElem.innerText = totalPrice.toFixed(2);
-  }
-  return totalNumberElem;
 }
 
 //   2.3 renderCart()
@@ -260,6 +242,38 @@ function renderCartItem(item) {
 //  3.0.1 addItemToCart()
 //    - addEventListener to buttonAddToCartElem in renderStoreItem()
 //    - create an empty array that will store/hold item objects and its quantity
+
+// inputs: storeItem object and cartItems[]
+// output: -
+function addItemToCart(storeItem, cartItems) {
+  let foundItem = null;
+
+  // check if item in the cart exists
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const cartItemId = cartItem.item.id;
+
+    const storeItemId = storeItem.id;
+
+    if (cartItemId === storeItemId) {
+      foundItem = cartItem;
+      break;
+    }
+  }
+
+  //if item in the cart exists, increase quantity;
+  // else add new item to the cart
+  if (foundItem) {
+    foundItem.quantity += 1;
+  } else {
+    const newItem = {
+      item: storeItem,
+      quantity: 1,
+    };
+
+    cartItems.push(newItem);
+  }
+}
 
 //   3.0.2 incrementQuantity()
 //     - addEventListener to ".add-btn"
