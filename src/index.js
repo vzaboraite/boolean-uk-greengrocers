@@ -10,6 +10,27 @@ This is how an item object should look like
 
 */
 
+/*
+Challenge 1
+- Add filters to the store ie. 
+  filter by item type; when a user clicks a filter they will only see items of that type
+
+1.0 update storeItems[]:
+  - add types of either vegetable or fruit to the item 
+
+2.0 create filter buttons in store section:
+  - show all items;
+  - show vegetables
+  - show fruits
+
+  2.1 add event listeners to the buttons
+
+3.0 create filter function
+  - input: storeItems array
+  - output: filteredItems array
+
+*/
+
 // Anchor elements:
 const storeItemListElem = document.querySelector(".store--item-list");
 
