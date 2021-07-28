@@ -11,33 +11,35 @@ This is how an item object should look like
 */
 
 /*
-Challenge 1
-- Add filters to the store ie. 
-  filter by item type; when a user clicks a filter they will only see items of that type
+Challenge 2
+- Add sorting to the store ie. sort by price or sort alphabetically; 
+  when a user clicks sort they will see a sorted list of items
 
-1.0 update storeItems[]:
-  - add types of either vegetable or fruit to the item 
-
-2.0 create filter buttons in store section and append them to "#store" between h1 and ul
-  - show all items;
-  - show vegetables
-  - show fruits
+1.0 create sorting buttons in store section and append them to 
+    "#store" between `filter buttons` and `ul`:
+  - sort by price: lowest/highest price;
+  - sort alphabetically ascending/descending
 
   - create structure for buttons:
    <div class="center">
-    <span>Filter items by type:</span>
+    <span>Sort items by:</span>
+    <span>Price:</span>
     <div>
-      <button>Vegetable</button>
-      <button>Fruit</button>
-      <button>Show all items</button>
+      <button style="margin:5px>Low to high</button>
+      <button style="margin:5px>High to low</button>
+    </div>
+    <span>Name:</span>
+    <div>
+      <button style="margin:5px>A to Z</button>
+      <button style="margin:5px>Z to A</button>
     </div>
    </div>
 
-  2.1 add event listeners to the buttons
+  1.1 add event listeners to the buttons
 
-3.0 create filter function
-  - input: storeItems array and expectedType string
-  - output: filteredItems array
+2.0 create sorting functions
+  - input: storeItems array and ??
+  - output: sortedItems array
 
 */
 
