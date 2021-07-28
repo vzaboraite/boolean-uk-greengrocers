@@ -10,38 +10,12 @@ This is how an item object should look like
 
 */
 
-/*
-*******Deliverables*******
-- A user can view a selection of items in the store
-- From the store, a user can add an item to their cart
-- From the cart, a user can view and adjust the number of items in their cart
-    - If an item's quantity equals zero it is removed from the cart
-- A user can view the current total in their cart
-
-*******Instructions*******
-- Use data structures to store your data
-- Create render functions to work with the data
-- Create action functions to update your data (for the Cart section)
-
-*******Tips*******
-- Use action functions with your Event Listeners, these will have names like addItemToCart and removeItemFromCart
-*/
-
-// Anchor objects/elements:
-// *1 for store items: ".store--item-list"
-// *2 for cart items: ".cart--item-list"
-// *3 for total price: ".total-number"
-
+// Anchor elements:
 const storeItemListElem = document.querySelector(".store--item-list");
 
 const cartItemListElem = document.querySelector(".cart--item-list");
 
 const totalNumberElem = document.querySelector(".total-number");
-
-// 1.0 storeItems[{}, {}...]:
-//   - create an array of objects using given template above.
-//   -object keys:
-//     => id, name, price
 
 const storeItems = [
   {
@@ -97,14 +71,6 @@ const storeItems = [
 ];
 
 const cartItems = [];
-// 2.0 create render functions:
-
-//   2.1 renderStoreItemsList(items):
-//     - use renderStoreItem();
-//      - use for loop to generate list item elements
-
-//   - input: an array of store items
-//   - output: -
 
 // reusable function used in renderStoreItem() and renderCartItem()
 function renderImageElement(item) {
@@ -126,19 +92,6 @@ function renderStoreItemsList(items) {
 }
 
 renderStoreItemsList(storeItems);
-
-//   2.2 create renderStoreItem(item):
-//     - use template in templates/store-item.html
-//       => li
-//         -inside li:
-//         => div.className = "store--item-icon"
-//           - inside div:
-//             => img:
-//               - attributes: src, alt
-//         => button.innerText = "Add to cart"
-
-//   - input: item from storeItems array
-//   - output: listItemElem
 
 function renderStoreItem(item) {
   const listItemElem = document.createElement("li");
@@ -163,20 +116,12 @@ function renderStoreItem(item) {
   return listItemElem;
 }
 
-// belongs to buttonAddToCartElem event
 function updateCartElement() {
   cartItemListElem.innerHTML = "";
 
   renderCart(cartItems);
   countTotalPrice(cartItems);
 }
-
-//   2.3 renderCart()
-//     - use renderCartItem();
-//     - use for loop to generate list item elements
-
-//   - input: an array of store items
-//   - output: -
 
 function renderCart(items) {
   for (let i = 0; i < items.length; i++) {
@@ -185,27 +130,6 @@ function renderCart(items) {
     cartItemListElem.append(listItemElem);
   }
 }
-
-//   2.4 create renderCartItem(item):
-//     - use template in templates/cart-item.html
-//       => li
-//         - inside li:
-//         => img:
-//           - attributes: className = "cart--item-icon", src(assets/icons/...), alt
-//         => p:
-//           - innerText = itemName
-//         => button:
-//           - className/List = "quantity-btn remove-btn center"
-//           - innerText = "-"
-//         => span:
-//           - className/List = "quantity-text center"
-//           - innerText = number
-//         => button:
-//           - className/List = "quantity-btn add-btn center"
-//           - innerText = "+"
-
-//   - input: an object from storeItems array
-//   - output: listItemElem
 
 function renderCartItem(item) {
   const listItemElem = document.createElement("li");
@@ -222,7 +146,7 @@ function renderCartItem(item) {
   const minusButtonElem = document.createElement("button");
   minusButtonElem.setAttribute("class", "quantity-btn remove-btn center");
   minusButtonElem.innerText = "-";
-  // Event listener "click"
+  // Decrement quantity by 1
   minusButtonElem.addEventListener("click", () => {
     item.quantity -= 1;
     // if item quantity is less than 1, find that item in the cartItems[] and remove it.
@@ -241,7 +165,7 @@ function renderCartItem(item) {
   const plusButtonElem = document.createElement("button");
   plusButtonElem.setAttribute("class", "quantity-btn add-btn center");
   plusButtonElem.innerText = "+";
-  // Event listener "click"
+  // Increment quantity by 1
   plusButtonElem.addEventListener("click", () => {
     item.quantity += 1;
     updateCartElement();
@@ -251,14 +175,6 @@ function renderCartItem(item) {
   return listItemElem;
 }
 
-// 3.0 create action functions: (HARD)
-// USER ACTIONS:
-//  3.0.1 addItemToCart()
-//    - addEventListener to buttonAddToCartElem in renderStoreItem()
-//    - create an empty array that will store/hold item objects and its quantity
-
-// inputs: storeItem object and cartItems[]
-// output: -
 function addItemToCart(storeItem, cartItems) {
   let foundItem = null;
 
@@ -288,20 +204,6 @@ function addItemToCart(storeItem, cartItems) {
     cartItems.push(newItem);
   }
 }
-
-//   3.0.2 incrementQuantity()
-//     - addEventListener to ".add-btn"
-
-//  3.0.3 decrementQuantity()
-//     - addEventListener to ".remove-btn"
-
-// PROGRAM SUBACTIONS:
-//   3.0.4 removeFromCart()
-//    - works with decrementQuantity() in 3.0.3
-//    - if quantity = 0
-
-//   3.0.5 countTotalPrice()
-//    - will work with an array described in step 3.0.1
 
 function countTotalPrice(items) {
   let totalPrice = 0;
