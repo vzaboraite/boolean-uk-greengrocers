@@ -232,6 +232,11 @@ function renderCartItem(item) {
   const plusButtonElem = document.createElement("button");
   plusButtonElem.setAttribute("class", "quantity-btn add-btn center");
   plusButtonElem.innerText = "+";
+  // Event listener "click"
+  plusButtonElem.addEventListener("click", () => {
+    item.quantity += 1;
+    updateCartElement();
+  });
   listItemElem.append(plusButtonElem);
 
   return listItemElem;
