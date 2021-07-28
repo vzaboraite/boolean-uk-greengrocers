@@ -226,7 +226,7 @@ function renderCartItem(item) {
 
   const quantityElem = document.createElement("span");
   quantityElem.setAttribute("class", "quantity-text center");
-  quantityElem.innerText = "1";
+  quantityElem.innerText = item.quantity;
   listItemElem.append(quantityElem);
 
   const plusButtonElem = document.createElement("button");
@@ -288,4 +288,17 @@ function addItemToCart(storeItem, cartItems) {
 
 //   3.0.5 countTotalPrice()
 //    - will work with an array described in step 3.0.1
-//
+
+function countTotalPrice(items) {
+  let totalPrice = 0;
+  for (let i = 0; i < items.length; i++) {
+    const product = items[i];
+    const price = product.item.price;
+    const quantity = product.quantity;
+
+    totalPrice += price * quantity;
+
+    totalNumberElem.innerText = totalPrice.toFixed(2);
+  }
+  return totalNumberElem;
+}
