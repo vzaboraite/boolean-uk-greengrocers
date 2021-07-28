@@ -222,6 +222,15 @@ function renderCartItem(item) {
   const minusButtonElem = document.createElement("button");
   minusButtonElem.setAttribute("class", "quantity-btn remove-btn center");
   minusButtonElem.innerText = "-";
+  // Event listener "click"
+  minusButtonElem.addEventListener("click", () => {
+    item.quantity -= 1;
+    // if item quantity is less than 1, find that item in the cartItems[] and remove it.
+    if (item.quantity < 1) {
+      cartItems.splice(cartItems.indexOf(item), 1);
+    }
+    updateCartElement();
+  });
   listItemElem.append(minusButtonElem);
 
   const quantityElem = document.createElement("span");
