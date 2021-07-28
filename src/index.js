@@ -167,6 +167,7 @@ function renderStoreItem(item) {
   return listItemElem;
 }
 
+// belongs to buttonAddToCartElem event
 function updateCartElement() {
   cartItemListElem.innerHTML = "";
 
@@ -174,8 +175,6 @@ function updateCartElement() {
   countTotalPrice(cartItems);
 }
 
-// TODO: continue working on this function
-// update totalNumberElem.innerText (totalPrice)
 function countTotalPrice(items) {
   let totalPrice = 0;
   for (let i = 0; i < items.length; i++) {
@@ -184,8 +183,10 @@ function countTotalPrice(items) {
     const quantity = product.quantity;
 
     totalPrice += price * quantity;
+
+    totalNumberElem.innerText = totalPrice.toFixed(2);
   }
-  return totalPrice;
+  return totalNumberElem;
 }
 
 //   2.3 renderCart()
