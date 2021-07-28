@@ -125,6 +125,8 @@ function renderFilterButtons() {
   storeElem.insertBefore(divSectionElem, mainHeadingElem.nextSibling);
 
   const spanElem = document.createElement("span");
+  spanElem.style.textTransform = "uppercase";
+  spanElem.style.fontWeight = "900";
   spanElem.innerText = "Filter by type:";
   divSectionElem.append(spanElem);
 
@@ -166,9 +168,12 @@ renderFilterButtons();
 function renderSortButtons() {
   const sortSectionElem = document.createElement("div");
   sortSectionElem.className = "center";
+  sortSectionElem.style.marginBottom = "1rem";
   storeElem.insertBefore(sortSectionElem, mainHeadingElem.nextSibling);
 
   const sortSpanElem = document.createElement("span");
+  sortSpanElem.style.textTransform = "uppercase";
+  sortSpanElem.style.fontWeight = "900";
   sortSpanElem.innerText = "Sort items by:";
   sortSectionElem.append(sortSpanElem);
 
