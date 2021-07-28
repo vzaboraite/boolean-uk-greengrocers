@@ -117,6 +117,38 @@ const storeItems = [
 
 const cartItems = [];
 
+function renderFilterButtons() {
+  const divSectionElem = document.createElement("div");
+  divSectionElem.className = "center";
+  storeElem.insertBefore(divSectionElem, mainHeadingElem.nextSibling);
+
+  const spanElem = document.createElement("span");
+  spanElem.innerText = "Filter by type:";
+  divSectionElem.append(spanElem);
+
+  const divBtnElem = document.createElement("div");
+  divSectionElem.append(divBtnElem);
+
+  const veggieBtnElem = document.createElement("button");
+  veggieBtnElem.className = "filter-button";
+  veggieBtnElem.innerText = "Vegetables";
+  veggieBtnElem.style.margin = "5px";
+  divBtnElem.append(veggieBtnElem);
+
+  const fruitBtnElem = document.createElement("button");
+  fruitBtnElem.className = "filter-button";
+  fruitBtnElem.innerText = "Fruits";
+  fruitBtnElem.style.margin = "5px";
+  divBtnElem.append(fruitBtnElem);
+
+  const allItemsBtnElem = document.createElement("button");
+  allItemsBtnElem.className = "filter-button";
+  allItemsBtnElem.innerText = "Show all items";
+  allItemsBtnElem.style.margin = "5px";
+  divBtnElem.append(allItemsBtnElem);
+}
+renderFilterButtons();
+
 // reusable function used in renderStoreItem() and renderCartItem()
 function renderImageElement(item) {
   const imageElem = document.createElement("img");
