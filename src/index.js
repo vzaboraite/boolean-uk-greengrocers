@@ -217,6 +217,56 @@ function renderSortButtons() {
 }
 renderSortButtons();
 
+// isDecending represents boolean, that will be passed to a
+//  function call as true/false value: if isDecending is true, program
+//  sort items by high-to-low price, otherwise - low-to-high price
+function sortItemsByPrice(items, isDescending) {
+  const sortedItems = [];
+
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i];
+    const price = item.price;
+
+    for (let j = 0; j < sortedItems.length; j++) {
+      const sortedItem = sortedItems[j];
+      const sortedPrice = sortedItem.price;
+      // if prices of items in storeItems[] and sortedItems[] are equal,
+      // then add item right after sortedItem
+      if (sortedPrice === price) {
+        sortedItems.splice(j + 1, 0, item);
+        break;
+
+        // if the price of the item from the storeItems[] is higher than price of sortedItem,
+        // add item at index where sortedItem was before; sortedItem stands after new item;
+
+        // boolean evaluation of prices, compared with boolean value(added later to function call)
+        // toggles sorting process on function call in event listener: descending if expression
+        // evaluates to true, and ascending - if false.
+      } else if (sortedPrice < price === isDescending) {
+        sortedItems.splice(j, 0, item);
+        break;
+        // if the price of item from the storeItems[] is lower than price of sortedItem, check
+        // if there are more sortedItems to compare; when it reaches last sortedItem and it has higher price
+        // than item from the storeItems[], push item to the end of the array.
+
+        // isDescending works same as in previous else-if expression
+      } else if (sortedPrice > price === isDescending) {
+        if (sortedItems.length === j + 1) {
+          sortedItems.push(item);
+          break;
+        }
+      }
+    }
+
+    // adding first item from storeItems[] to sortedItems[], if storeItems[] is not empty.
+    if (i === 0) {
+      sortedItems.push(item);
+    }
+  }
+
+  return sortedItems;
+}
+
 function filterItemsByType(items, expectedType) {
   const filteredItems = [];
 
