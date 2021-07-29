@@ -275,6 +275,42 @@ function sortItemsByPrice(items, isDescending) {
   return sortedItems;
 }
 
+// isDecending represents boolean, that will be passed to a
+//  function call as true/false value: if isDecending is true, program
+//  sort items by name ascending, otherwise - by name descending.
+function sortItemsAlphabetically(items, isDescending) {
+  const sortedItems = [];
+
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i];
+    const name = item.name;
+
+    for (let j = 0; j < sortedItems.length; j++) {
+      const sortedItem = sortedItems[j];
+      const sortedName = sortedItem.name;
+
+      if (sortedName === name) {
+        sortedItems.splice(j + 1, 0, item);
+        break;
+      } else if (sortedName < name === isDescending) {
+        sortedItems.splice(j, 0, item);
+        break;
+      } else if (sortedName > name === isDescending) {
+        if (sortedItems.length === j + 1) {
+          sortedItems.push(item);
+          break;
+        }
+      }
+    }
+    // adding first item from storeItems[] to sortedItems[], if storeItems[] is not empty.
+    if (i === 0) {
+      sortedItems.push(item);
+    }
+  }
+
+  return sortedItems;
+}
+
 function filterItemsByType(items, expectedType) {
   const filteredItems = [];
 
