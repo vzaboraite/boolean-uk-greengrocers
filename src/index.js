@@ -188,12 +188,20 @@ function renderSortButtons() {
   lowBtnElem.className = "sort-button";
   lowBtnElem.innerText = "Low to high";
   lowBtnElem.style.margin = "5px";
+  lowBtnElem.addEventListener("click", () => {
+    storeItemListElem.innerHTML = "";
+    renderStoreItemsList(sortItemsByPrice(storeItems, false));
+  });
   priceBtnElem.append(lowBtnElem);
 
   const highBtnElem = document.createElement("button");
   highBtnElem.className = "sort-button";
   highBtnElem.innerText = "High to low";
   highBtnElem.style.margin = "5px";
+  highBtnElem.addEventListener("click", () => {
+    storeItemListElem.innerHTML = "";
+    renderStoreItemsList(sortItemsByPrice(storeItems, true));
+  });
   priceBtnElem.append(highBtnElem);
 
   const nameSpanElem = document.createElement("span");
