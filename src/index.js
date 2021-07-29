@@ -215,12 +215,20 @@ function renderSortButtons() {
   ascendingBtnElem.className = "sort-button";
   ascendingBtnElem.innerText = "Ascending";
   ascendingBtnElem.style.margin = "5px";
+  ascendingBtnElem.addEventListener("click", () => {
+    storeItemListElem.innerHTML = "";
+    renderStoreItemsList(sortItemsAlphabetically(storeItems, false));
+  });
   nameBtnElem.append(ascendingBtnElem);
 
   const descendingBtnElem = document.createElement("button");
   descendingBtnElem.className = "sort-button";
   descendingBtnElem.innerText = "Descending";
   descendingBtnElem.style.margin = "5px";
+  descendingBtnElem.addEventListener("click", () => {
+    storeItemListElem.innerHTML = "";
+    renderStoreItemsList(sortItemsAlphabetically(storeItems, true));
+  });
   nameBtnElem.append(descendingBtnElem);
 }
 renderSortButtons();
