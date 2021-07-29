@@ -476,6 +476,9 @@ function countTotalPrice(items) {
     const quantity = product.quantity;
 
     totalPrice += price * quantity;
+  }
+  totalNumberElem.innerText = totalPrice.toFixed(2);
+}
 
     totalNumberElem.innerText = totalPrice.toFixed(2);
   }
