@@ -88,6 +88,9 @@ const storeItems = [
 
 const cartItems = [];
 
+// STATE VARIABLES
+
+let filterOption = "all";
 // RENDER FUNCTIONS
 
 function renderSortFilterOptions() {
@@ -108,33 +111,24 @@ function renderSortFilterOptions() {
   filterElem.style.backgroundColor = "#f1ecec";
   filterElem.style.borderRadius = "3px";
   filterElem.addEventListener("change", (event) => {
-    console.log(event.target.value);
-    if (event.target.value === "veg") {
-      storeItemListElem.innerHTML = "";
-      renderStoreItemsList(filterItemsByType(storeItems, "vegetable"));
-    } else if (event.target.value === "fru") {
-      storeItemListElem.innerHTML = "";
-      renderStoreItemsList(filterItemsByType(storeItems, "fruit"));
-    } else {
-      storeItemListElem.innerHTML = "";
-      renderStoreItemsList(storeItems);
-    }
+    filterOption = event.target.value;
+    renderStoreItemsList(storeItems);
   });
   formElem.append(filterElem);
 
   const defaultFilterOptElem = document.createElement("option");
-  defaultFilterOptElem.setAttribute("value", "");
-  defaultFilterOptElem.innerText = "-Show all-";
+  defaultFilterOptElem.setAttribute("value", "all");
+  defaultFilterOptElem.innerText = "Show all";
   filterElem.append(defaultFilterOptElem);
 
   const vegOptionElem = document.createElement("option");
-  vegOptionElem.setAttribute("value", "veg");
+  vegOptionElem.setAttribute("value", "vegetable");
   vegOptionElem.innerText = "Vegetables";
 
   filterElem.append(vegOptionElem);
 
   const fruOptionElem = document.createElement("option");
-  fruOptionElem.setAttribute("value", "fru");
+  fruOptionElem.setAttribute("value", "fruit");
   fruOptionElem.innerText = "Fruits";
   filterElem.append(fruOptionElem);
 
@@ -214,8 +208,12 @@ function renderImageElement(item) {
 }
 
 function renderStoreItemsList(items) {
-  for (let i = 0; i < items.length; i++) {
-    const item = items[i];
+  storeItemListElem.innerHTML = "";
+
+  const filteredItems =
+    filterOption === "all"
+      ? [...items]
+      : filterItemsByType(items, filterOption);
     const listItemElem = renderStoreItem(item);
     storeItemListElem.append(listItemElem);
   }
