@@ -91,6 +91,8 @@ const cartItems = [];
 // STATE VARIABLES
 
 let filterOption = "all";
+let sortOption = "";
+
 // RENDER FUNCTIONS
 
 function renderSortFilterOptions() {
@@ -143,23 +145,8 @@ function renderSortFilterOptions() {
   sortElem.style.backgroundColor = "#f1ecec";
   sortElem.style.borderRadius = "3px";
   sortElem.addEventListener("change", (event) => {
-    console.log(event.target.value);
-    if (event.target.value === "low-high") {
-      storeItemListElem.innerHTML = "";
-      renderStoreItemsList(sortItemsByPrice(storeItems, false));
-    } else if (event.target.value === "high-low") {
-      storeItemListElem.innerHTML = "";
-      renderStoreItemsList(sortItemsByPrice(storeItems, true));
-    } else if (event.target.value === "asc") {
-      storeItemListElem.innerHTML = "";
-      renderStoreItemsList(sortItemsAlphabetically(storeItems, false));
-    } else if (event.target.value === "desc") {
-      storeItemListElem.innerHTML = "";
-      renderStoreItemsList(sortItemsAlphabetically(storeItems, true));
-    } else {
-      storeItemListElem.innerHTML = "";
-      renderStoreItemsList(storeItems);
-    }
+    sortOption = event.target.value;
+    renderStoreItemsList(storeItems);
   });
   formElem.append(sortElem);
 
@@ -214,6 +201,11 @@ function renderStoreItemsList(items) {
     filterOption === "all"
       ? [...items]
       : filterItemsByType(items, filterOption);
+
+  let filteredAndSorted = sortItems(filteredItems, sortOption);
+
+  for (let i = 0; i < filteredAndSorted.length; i++) {
+    const item = filteredAndSorted[i];
     const listItemElem = renderStoreItem(item);
     storeItemListElem.append(listItemElem);
   }
@@ -232,7 +224,6 @@ function renderStoreItem(item) {
 
   const buttonAddToCartElem = document.createElement("button");
   buttonAddToCartElem.innerText = "Add to cart";
-  // Event listener "click"
   buttonAddToCartElem.addEventListener("click", () => {
     addItemToCart(item, cartItems);
 
@@ -258,7 +249,6 @@ function renderCartItem(item) {
   const minusButtonElem = document.createElement("button");
   minusButtonElem.setAttribute("class", "quantity-btn remove-btn center");
   minusButtonElem.innerText = "-";
-  // Decrement quantity by 1
   minusButtonElem.addEventListener("click", () => {
     item.quantity -= 1;
     removeFromCart(item, cartItems);
@@ -274,7 +264,6 @@ function renderCartItem(item) {
   const plusButtonElem = document.createElement("button");
   plusButtonElem.setAttribute("class", "quantity-btn add-btn center");
   plusButtonElem.innerText = "+";
-  // Increment quantity by 1
   plusButtonElem.addEventListener("click", () => {
     item.quantity += 1;
     updateCartElement();
@@ -367,6 +356,23 @@ function filterItemsByType(items, expectedType) {
     }
   }
   return filteredItems;
+}
+
+function sortItems(items, sortOption) {
+  let result;
+  if (sortOption === "low-high") {
+    result = sortItemsByPrice(items, false);
+  } else if (sortOption === "high-low") {
+    result = sortItemsByPrice(items, true);
+  } else if (sortOption === "asc") {
+    result = sortItemsAlphabetically(items, false);
+  } else if (sortOption === "desc") {
+    result = sortItemsAlphabetically(items, true);
+  } else {
+    result = [...items];
+  }
+
+  return result;
 }
 
 // isDecending represents boolean, that will be passed to a
