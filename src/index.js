@@ -263,10 +263,7 @@ function renderCartItem(item) {
   // Decrement quantity by 1
   minusButtonElem.addEventListener("click", () => {
     item.quantity -= 1;
-    // if item quantity is less than 1, find that item in the cartItems[] and remove it.
-    if (item.quantity < 1) {
-      cartItems.splice(cartItems.indexOf(item), 1);
-    }
+    removeFromCart(item, cartItems);
     updateCartElement();
   });
   listItemElem.append(minusButtonElem);
@@ -333,6 +330,15 @@ function addItemToCart(storeItem, cartItems) {
     };
 
     cartItems.push(newItem);
+  }
+}
+
+function removeFromCart(storeItem, cartItems) {
+  for (let i = 0; i < cartItems.length; i++) {
+    const item = cartItems[i];
+    if (item.quantity < 1) {
+      cartItems.splice(cartItems.indexOf(item), 1);
+    }
   }
 }
 
