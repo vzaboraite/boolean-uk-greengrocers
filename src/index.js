@@ -90,121 +90,117 @@ const cartItems = [];
 
 // RENDER FUNCTIONS
 
-// TODO: change buttons to form with a select element
-function renderFilterButtons() {
-  const divSectionElem = document.createElement("div");
-  divSectionElem.className = "center";
-  storeElem.insertBefore(divSectionElem, mainHeadingElem.nextSibling);
+function renderSortFilterOptions() {
+  const formElem = document.createElement("form");
+  formElem.className = "filter-select-form";
+  formElem.style.marginBottom = "1rem";
+  storeElem.insertBefore(formElem, mainHeadingElem.nextSibling);
 
-  const spanElem = document.createElement("span");
-  spanElem.style.textTransform = "uppercase";
-  spanElem.style.fontWeight = "900";
-  spanElem.innerText = "Filter by type:";
-  divSectionElem.append(spanElem);
+  const filterLabelElem = document.createElement("label");
+  filterLabelElem.setAttribute("for", "filter-section");
+  filterLabelElem.innerText = "Filter: ";
+  formElem.append(filterLabelElem);
 
-  const divBtnElem = document.createElement("div");
-  divSectionElem.append(divBtnElem);
-
-  const veggieBtnElem = document.createElement("button");
-  veggieBtnElem.className = "filter-button";
-  veggieBtnElem.innerText = "Vegetables";
-  veggieBtnElem.style.margin = "5px";
-  veggieBtnElem.addEventListener("click", () => {
-    storeItemListElem.innerHTML = "";
-    renderStoreItemsList(filterItemsByType(storeItems, "vegetable"));
+  const filterElem = document.createElement("select");
+  filterElem.setAttribute("name", "filter-section");
+  filterElem.setAttribute("id", "filter-section");
+  filterElem.style.marginRight = "1rem";
+  filterElem.style.backgroundColor = "#f1ecec";
+  filterElem.style.borderRadius = "3px";
+  filterElem.addEventListener("change", (event) => {
+    console.log(event.target.value);
+    if (event.target.value === "veg") {
+      storeItemListElem.innerHTML = "";
+      renderStoreItemsList(filterItemsByType(storeItems, "vegetable"));
+    } else if (event.target.value === "fru") {
+      storeItemListElem.innerHTML = "";
+      renderStoreItemsList(filterItemsByType(storeItems, "fruit"));
+    } else {
+      storeItemListElem.innerHTML = "";
+      renderStoreItemsList(storeItems);
+    }
   });
-  divBtnElem.append(veggieBtnElem);
+  formElem.append(filterElem);
 
-  const fruitBtnElem = document.createElement("button");
-  fruitBtnElem.className = "filter-button";
-  fruitBtnElem.innerText = "Fruits";
-  fruitBtnElem.style.margin = "5px";
-  fruitBtnElem.addEventListener("click", () => {
-    storeItemListElem.innerHTML = "";
-    renderStoreItemsList(filterItemsByType(storeItems, "fruit"));
-  });
-  divBtnElem.append(fruitBtnElem);
+  const defaultFilterOptElem = document.createElement("option");
+  defaultFilterOptElem.setAttribute("value", "");
+  defaultFilterOptElem.innerText = "-Show all-";
+  filterElem.append(defaultFilterOptElem);
 
-  const allItemsBtnElem = document.createElement("button");
-  allItemsBtnElem.className = "filter-button";
-  allItemsBtnElem.innerText = "Show all items";
-  allItemsBtnElem.style.margin = "5px";
-  allItemsBtnElem.addEventListener("click", () => {
-    storeItemListElem.innerHTML = "";
-    renderStoreItemsList(storeItems);
+  const vegOptionElem = document.createElement("option");
+  vegOptionElem.setAttribute("value", "veg");
+  vegOptionElem.innerText = "Vegetables";
+
+  filterElem.append(vegOptionElem);
+
+  const fruOptionElem = document.createElement("option");
+  fruOptionElem.setAttribute("value", "fru");
+  fruOptionElem.innerText = "Fruits";
+  filterElem.append(fruOptionElem);
+
+  const sortLabelElem = document.createElement("label");
+  sortLabelElem.setAttribute("for", "sort-section");
+  sortLabelElem.innerText = "Sort by: ";
+  formElem.append(sortLabelElem);
+
+  const sortElem = document.createElement("select");
+  sortElem.setAttribute("name", "sort-section");
+  sortElem.setAttribute("id", "sort-section");
+  sortElem.style.backgroundColor = "#f1ecec";
+  sortElem.style.borderRadius = "3px";
+  sortElem.addEventListener("change", (event) => {
+    console.log(event.target.value);
+    if (event.target.value === "low-high") {
+      storeItemListElem.innerHTML = "";
+      renderStoreItemsList(sortItemsByPrice(storeItems, false));
+    } else if (event.target.value === "high-low") {
+      storeItemListElem.innerHTML = "";
+      renderStoreItemsList(sortItemsByPrice(storeItems, true));
+    } else if (event.target.value === "asc") {
+      storeItemListElem.innerHTML = "";
+      renderStoreItemsList(sortItemsAlphabetically(storeItems, false));
+    } else if (event.target.value === "desc") {
+      storeItemListElem.innerHTML = "";
+      renderStoreItemsList(sortItemsAlphabetically(storeItems, true));
+    } else {
+      storeItemListElem.innerHTML = "";
+      renderStoreItemsList(storeItems);
+    }
   });
-  divBtnElem.append(allItemsBtnElem);
+  formElem.append(sortElem);
+
+  const defaultSortOptElem = document.createElement("option");
+  defaultSortOptElem.setAttribute("value", "");
+  defaultSortOptElem.innerText = "-";
+  sortElem.append(defaultSortOptElem);
+
+  const lowToHighOptionElem = document.createElement("option");
+  lowToHighOptionElem.setAttribute("value", "low-high");
+  lowToHighOptionElem.innerText = "Price (low-high)";
+  sortElem.append(lowToHighOptionElem);
+
+  const highToLowOptionElem = document.createElement("option");
+  highToLowOptionElem.setAttribute("value", "high-low");
+  highToLowOptionElem.innerText = "Price (high-low)";
+  sortElem.append(highToLowOptionElem);
+
+  const nameAscOptionElem = document.createElement("option");
+  nameAscOptionElem.setAttribute("value", "asc");
+  nameAscOptionElem.innerText = "Name (A-Z)";
+  sortElem.append(nameAscOptionElem);
+
+  const nameDescOptionElem = document.createElement("option");
+  nameDescOptionElem.setAttribute("value", "desc");
+  nameDescOptionElem.innerText = "Name (Z-A)";
+  sortElem.append(nameDescOptionElem);
+
+  const submitElem = document.createElement("input");
+  submitElem.setAttribute("type", "submit");
+  submitElem.setAttribute("hidden", "");
+  formElem.append(submitElem);
 }
-renderFilterButtons();
 
-// TODO: change buttons to form with a select element
-function renderSortButtons() {
-  const sortSectionElem = document.createElement("div");
-  sortSectionElem.className = "center";
-  sortSectionElem.style.marginBottom = "1rem";
-  storeElem.insertBefore(sortSectionElem, mainHeadingElem.nextSibling);
-
-  const sortSpanElem = document.createElement("span");
-  sortSpanElem.style.textTransform = "uppercase";
-  sortSpanElem.style.fontWeight = "900";
-  sortSpanElem.innerText = "Sort items by:";
-  sortSectionElem.append(sortSpanElem);
-
-  const priceSpanElem = document.createElement("span");
-  priceSpanElem.innerText = "Price:";
-  sortSectionElem.append(priceSpanElem);
-
-  const priceBtnElem = document.createElement("div");
-  sortSectionElem.append(priceBtnElem);
-
-  const lowBtnElem = document.createElement("button");
-  lowBtnElem.className = "sort-button";
-  lowBtnElem.innerText = "Low to high";
-  lowBtnElem.style.margin = "5px";
-  lowBtnElem.addEventListener("click", () => {
-    storeItemListElem.innerHTML = "";
-    renderStoreItemsList(sortItemsByPrice(storeItems, false));
-  });
-  priceBtnElem.append(lowBtnElem);
-
-  const highBtnElem = document.createElement("button");
-  highBtnElem.className = "sort-button";
-  highBtnElem.innerText = "High to low";
-  highBtnElem.style.margin = "5px";
-  highBtnElem.addEventListener("click", () => {
-    storeItemListElem.innerHTML = "";
-    renderStoreItemsList(sortItemsByPrice(storeItems, true));
-  });
-  priceBtnElem.append(highBtnElem);
-
-  const nameSpanElem = document.createElement("span");
-  nameSpanElem.innerText = "Name:";
-  sortSectionElem.append(nameSpanElem);
-
-  const nameBtnElem = document.createElement("div");
-  sortSectionElem.append(nameBtnElem);
-
-  const ascendingBtnElem = document.createElement("button");
-  ascendingBtnElem.className = "sort-button";
-  ascendingBtnElem.innerText = "Ascending";
-  ascendingBtnElem.style.margin = "5px";
-  ascendingBtnElem.addEventListener("click", () => {
-    storeItemListElem.innerHTML = "";
-    renderStoreItemsList(sortItemsAlphabetically(storeItems, false));
-  });
-  nameBtnElem.append(ascendingBtnElem);
-
-  const descendingBtnElem = document.createElement("button");
-  descendingBtnElem.className = "sort-button";
-  descendingBtnElem.innerText = "Descending";
-  descendingBtnElem.style.margin = "5px";
-  descendingBtnElem.addEventListener("click", () => {
-    storeItemListElem.innerHTML = "";
-    renderStoreItemsList(sortItemsAlphabetically(storeItems, true));
-  });
-  nameBtnElem.append(descendingBtnElem);
-}
-renderSortButtons();
+renderSortFilterOptions();
 
 // reusable function used in renderStoreItem() and renderCartItem()
 function renderImageElement(item) {
